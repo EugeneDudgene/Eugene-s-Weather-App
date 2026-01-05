@@ -44,6 +44,42 @@
             font-size: 0.9em;
         }
 
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: #e8e8e8;
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         .location-input {
             padding: 20px;
             background: #f8f9fa;
@@ -55,18 +91,24 @@
             gap: 10px;
         }
 
-        input[type="text"] {
+        input[type="text"], input[type="number"], input[type="date"], select, textarea {
             flex: 1;
             padding: 12px 15px;
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 1em;
             transition: border 0.3s;
+            font-family: inherit;
         }
 
-        input[type="text"]:focus {
+        input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
         }
 
         .btn {
@@ -87,6 +129,27 @@
         .btn-primary:hover {
             background: #5568d3;
             transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #4caf50;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger:hover {
+            background: #da190b;
         }
 
         .weather-display {
@@ -144,6 +207,32 @@
             font-size: 1.3em;
             font-weight: bold;
             color: #333;
+        }
+
+        .alert-box {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 4px solid;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
         }
 
         .farmer-tools {
@@ -224,6 +313,120 @@
             line-height: 1.6;
         }
 
+        .gdd-section {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .gdd-result {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .gdd-value {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .gdd-info {
+            text-align: center;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .crop-presets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .crop-preset {
+            padding: 10px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .crop-preset:hover {
+            border-color: #667eea;
+            background: #667eea15;
+        }
+
+        .activity-log {
+            padding: 20px;
+        }
+
+        .activity-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .activity-list {
+            margin-top: 20px;
+        }
+
+        .activity-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .activity-type {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .activity-date {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .activity-weather {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .activity-notes {
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
         .loading {
             text-align: center;
             padding: 40px;
@@ -240,6 +443,18 @@
             margin: 20px;
         }
 
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state span {
+            font-size: 4em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
         @media (max-width: 500px) {
             .header h1 {
                 font-size: 1.5em;
@@ -249,8 +464,17 @@
                 font-size: 3em;
             }
             
-            .tool-buttons {
+            .tool-buttons, .crop-presets {
                 grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                font-size: 0.85em;
+                padding: 12px 8px;
             }
         }
     </style>
@@ -262,17 +486,167 @@
             <p>Smart Weather for Smart Farming</p>
         </div>
 
-        <div class="location-input">
-            <div class="input-group">
-                <input type="text" id="locationInput" placeholder="Enter city name (e.g., Iowa City)" value="Des Moines">
-                <button class="btn btn-primary" onclick="getWeather()">Get Weather</button>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('weather')">Weather</button>
+            <button class="tab" onclick="switchTab('gdd')">GDD Calc</button>
+            <button class="tab" onclick="switchTab('alerts')">Alerts</button>
+            <button class="tab" onclick="switchTab('activities')">Farm Log</button>
+        </div>
+
+        <!-- Weather Tab -->
+        <div id="weatherTab" class="tab-content active">
+            <div class="location-input">
+                <div class="input-group">
+                    <input type="text" id="locationInput" placeholder="Enter city name (e.g., Iowa City)" value="Des Moines">
+                    <button class="btn btn-primary" onclick="getWeather()">Get Weather</button>
+                </div>
+            </div>
+            <div id="weatherContent"></div>
+        </div>
+
+        <!-- GDD Calculator Tab -->
+        <div id="gddTab" class="tab-content">
+            <div class="gdd-section">
+                <h2 class="tools-title">🌡️ Growing Degree Days Calculator</h2>
+                
+                <div class="form-group">
+                    <label class="form-label">Select Crop Preset:</label>
+                    <div class="crop-presets">
+                        <div class="crop-preset" onclick="setCropPreset('corn', 10, 30)">
+                            🌽 Corn<br><small>Base: 10°C</small>
+                        </div>
+                        <div class="crop-preset" onclick="setCropPreset('wheat', 0, 25)">
+                            🌾 Wheat<br><small>Base: 0°C</small>
+                        </div>
+                        <div class="crop-preset" onclick="setCropPreset('soybean', 10, 30)">
+                            🫘 Soybean<br><small>Base: 10°C</small>
+                        </div>
+                        <div class="crop-preset" onclick="setCropPreset('tomato', 10, 30)">
+                            🍅 Tomato<br><small>Base: 10°C</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Base Temperature (°C):</label>
+                    <input type="number" id="baseTemp" value="10" min="0" max="20">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Upper Threshold (°C):</label>
+                    <input type="number" id="upperTemp" value="30" min="20" max="40">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Start Date:</label>
+                    <input type="date" id="startDate">
+                </div>
+
+                <button class="btn btn-success" onclick="calculateGDD()">Calculate GDD</button>
+
+                <div id="gddResult"></div>
             </div>
         </div>
 
-        <div id="weatherContent"></div>
+        <!-- Alerts Tab -->
+        <div id="alertsTab" class="tab-content">
+            <div class="gdd-section">
+                <h2 class="tools-title">⚠️ Frost & Freeze Alerts</h2>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Phone Number (for SMS alerts):</label>
+                    <input type="text" id="phoneNumber" placeholder="+1234567890">
+                    <small style="color: #888; display: block; margin-top: 5px;">Note: SMS functionality requires backend setup</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Alert Threshold Temperature (°C):</label>
+                    <input type="number" id="alertTemp" value="2" min="-5" max="10">
+                </div>
+
+                <button class="btn btn-success" onclick="setupAlerts()">Enable Alerts</button>
+
+                <div id="alertsDisplay" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+
+        <!-- Farm Activities Tab -->
+        <div id="activitiesTab" class="tab-content">
+            <div class="activity-log">
+                <h2 class="tools-title">📝 Farm Activity Log</h2>
+                
+                <div class="activity-form">
+                    <div class="form-group">
+                        <label class="form-label">Activity Type:</label>
+                        <select id="activityType">
+                            <option value="Planting">🌱 Planting</option>
+                            <option value="Irrigation">💧 Irrigation</option>
+                            <option value="Fertilizing">🌿 Fertilizing</option>
+                            <option value="Spraying">🚁 Spraying</option>
+                            <option value="Harvesting">🌾 Harvesting</option>
+                            <option value="Soil Work">🚜 Soil Work</option>
+                            <option value="Other">📋 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Date:</label>
+                        <input type="date" id="activityDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Field/Location:</label>
+                        <input type="text" id="activityLocation" placeholder="e.g., North Field">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Notes:</label>
+                        <textarea id="activityNotes" placeholder="Details about the activity..."></textarea>
+                    </div>
+
+                    <button class="btn btn-success" onclick="logActivity()">Log Activity</button>
+                </div>
+
+                <div class="activity-list" id="activityList"></div>
+            </div>
+        </div>
     </div>
 
     <script>
+        let currentWeather = null;
+        let activities = [];
+
+        // Load activities from memory
+        function loadActivities() {
+            try {
+                const saved = localStorage.getItem('farmActivities');
+                if (saved) {
+                    activities = JSON.parse(saved);
+                    displayActivities();
+                }
+            } catch (error) {
+                console.error('Error loading activities:', error);
+                activities = [];
+            }
+        }
+
+        // Save activities to memory
+        function saveActivities() {
+            try {
+                localStorage.setItem('farmActivities', JSON.stringify(activities));
+            } catch (error) {
+                console.error('Error saving activities:', error);
+            }
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
         async function getWeather() {
             const location = document.getElementById('locationInput').value;
             const content = document.getElementById('weatherContent');
@@ -295,10 +669,12 @@
 
                 const { latitude, longitude, name, country } = geoData.results[0];
 
-                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&timezone=auto`);
+                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&timezone=auto&forecast_days=7`);
                 const weather = await weatherResponse.json();
 
+                currentWeather = { weather, name, country, latitude, longitude };
                 displayWeather(weather, name, country);
+                checkFrostAlerts(weather);
             } catch (error) {
                 content.innerHTML = '<div class="error">Error fetching weather data. Please try again.</div>';
             }
@@ -328,6 +704,64 @@
                 95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Severe thunderstorm'
             };
             return descriptions[code] || 'Unknown';
+        }
+
+        function checkFrostAlerts(weather) {
+            const daily = weather.daily;
+            const alerts = [];
+            const threshold = parseFloat(document.getElementById('alertTemp')?.value || 2);
+
+            for (let i = 0; i < Math.min(7, daily.time.length); i++) {
+                const minTemp = daily.temperature_2m_min[i];
+                const date = new Date(daily.time[i]).toLocaleDateString();
+                
+                if (minTemp <= threshold && minTemp > -5) {
+                    alerts.push({
+                        type: 'warning',
+                        date: date,
+                        temp: minTemp,
+                        message: `Frost Warning: ${date} - Low of ${Math.round(minTemp)}°C expected`
+                    });
+                } else if (minTemp <= -5) {
+                    alerts.push({
+                        type: 'danger',
+                        date: date,
+                        temp: minTemp,
+                        message: `Hard Freeze Alert: ${date} - Extreme low of ${Math.round(minTemp)}°C expected`
+                    });
+                }
+            }
+
+            displayAlerts(alerts);
+        }
+
+        function displayAlerts(alerts) {
+            const alertsDisplay = document.getElementById('alertsDisplay');
+            
+            if (alerts.length === 0) {
+                alertsDisplay.innerHTML = '<div class="alert-box alert-info">✅ No frost or freeze alerts for the next 7 days. Your crops are safe!</div>';
+            } else {
+                let html = '<h3 style="margin-bottom: 15px;">Active Alerts:</h3>';
+                alerts.forEach(alert => {
+                    const alertClass = alert.type === 'danger' ? 'alert-danger' : 'alert-warning';
+                    const icon = alert.type === 'danger' ? '🚨' : '⚠️';
+                    html += `<div class="alert-box ${alertClass}">${icon} ${alert.message}</div>`;
+                });
+                alertsDisplay.innerHTML = html;
+            }
+        }
+
+        function setupAlerts() {
+            const phone = document.getElementById('phoneNumber').value;
+            if (phone) {
+                alert('Alert setup complete! You will receive notifications when frost conditions are detected.\n\nNote: Full SMS integration requires backend configuration.');
+            } else {
+                alert('Please enter your phone number to receive SMS alerts.');
+            }
+            
+            if (currentWeather) {
+                checkFrostAlerts(currentWeather.weather);
+            }
         }
 
         function displayWeather(weather, city, country) {
@@ -460,9 +894,191 @@
             showAdvice('🚁 Spraying Advice', advice);
         }
 
-        // Load weather on page load
+        // GDD Calculator Functions
+        function setCropPreset(cropName, base, upper) {
+            document.getElementById('baseTemp').value = base;
+            document.getElementById('upperTemp').value = upper;
+        }
+
+        async function calculateGDD() {
+            const baseTemp = parseFloat(document.getElementById('baseTemp').value);
+            const upperTemp = parseFloat(document.getElementById('upperTemp').value);
+            const startDate = document.getElementById('startDate').value;
+
+            if (!startDate) {
+                alert('Please select a start date');
+                return;
+            }
+
+            if (!currentWeather) {
+                alert('Please fetch weather data first from the Weather tab');
+                return;
+            }
+
+            const resultDiv = document.getElementById('gddResult');
+            resultDiv.innerHTML = '<div class="loading">Calculating GDD...</div>';
+
+            try {
+                const start = new Date(startDate);
+                const now = new Date();
+                const daysDiff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+
+                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${currentWeather.latitude}&longitude=${currentWeather.longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&past_days=${Math.min(daysDiff, 92)}&forecast_days=1`);
+                const data = await weatherResponse.json();
+
+                let totalGDD = 0;
+                const daily = data.daily;
+
+                for (let i = 0; i < daily.time.length; i++) {
+                    const tMax = Math.min(daily.temperature_2m_max[i], upperTemp);
+                    const tMin = Math.max(daily.temperature_2m_min[i], baseTemp);
+                    const tAvg = (tMax + tMin) / 2;
+                    const gdd = Math.max(0, tAvg - baseTemp);
+                    totalGDD += gdd;
+                }
+
+                displayGDDResult(totalGDD, daysDiff, baseTemp);
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="error">Error calculating GDD. Please try again.</div>';
+            }
+        }
+
+        function displayGDDResult(gdd, days, baseTemp) {
+            const resultDiv = document.getElementById('gddResult');
+            
+            let cropInfo = '';
+            if (baseTemp === 10) {
+                cropInfo = `
+                    <div style="margin-top: 15px; padding: 15px; background: white; border-radius: 10px;">
+                        <strong>Typical Milestones (Corn/Soybean):</strong><br>
+                        <small>
+                        • 50-100 GDD: Germination<br>
+                        • 800-900 GDD: Tasseling/Flowering<br>
+                        • 1400-1500 GDD: Physiological maturity<br>
+                        • 2700-3000 GDD: Harvest ready
+                        </small>
+                    </div>
+                `;
+            } else if (baseTemp === 0) {
+                cropInfo = `
+                    <div style="margin-top: 15px; padding: 15px; background: white; border-radius: 10px;">
+                        <strong>Typical Milestones (Wheat):</strong><br>
+                        <small>
+                        • 200-300 GDD: Tillering<br>
+                        • 800-1000 GDD: Heading<br>
+                        • 1400-1600 GDD: Grain fill<br>
+                        • 2000-2200 GDD: Harvest ready
+                        </small>
+                    </div>
+                `;
+            }
+
+            resultDiv.innerHTML = `
+                <div class="gdd-result">
+                    <div class="gdd-info">Accumulated Growing Degree Days</div>
+                    <div class="gdd-value">${Math.round(gdd)} GDD</div>
+                    <div class="gdd-info">Over ${days} days since ${document.getElementById('startDate').value}</div>
+                    <div class="gdd-info">Base Temperature: ${baseTemp}°C</div>
+                    ${cropInfo}
+                </div>
+            `;
+        }
+
+        // Farm Activity Log Functions
+        function logActivity() {
+            const type = document.getElementById('activityType').value;
+            const date = document.getElementById('activityDate').value;
+            const location = document.getElementById('activityLocation').value;
+            const notes = document.getElementById('activityNotes').value;
+
+            if (!date || !location) {
+                alert('Please fill in the date and location fields');
+                return;
+            }
+
+            const activity = {
+                id: Date.now(),
+                type: type,
+                date: date,
+                location: location,
+                notes: notes,
+                weather: currentWeather ? {
+                    temp: Math.round(currentWeather.weather.current.temperature_2m),
+                    condition: getWeatherDescription(currentWeather.weather.current.weather_code),
+                    humidity: currentWeather.weather.current.relative_humidity_2m,
+                    wind: Math.round(currentWeather.weather.current.wind_speed_10m)
+                } : null
+            };
+
+            activities.unshift(activity);
+            saveActivities();
+            displayActivities();
+
+            // Clear form
+            document.getElementById('activityLocation').value = '';
+            document.getElementById('activityNotes').value = '';
+            
+            alert('Activity logged successfully!');
+        }
+
+        function displayActivities() {
+            const listDiv = document.getElementById('activityList');
+
+            if (activities.length === 0) {
+                listDiv.innerHTML = `
+                    <div class="empty-state">
+                        <span>📋</span>
+                        <p>No activities logged yet.</p>
+                        <p>Start logging your farm activities to track patterns with weather data.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<h3 style="margin-bottom: 15px;">Activity History:</h3>';
+            
+            activities.forEach(activity => {
+                const activityIcon = activity.type.split(' ')[0];
+                html += `
+                    <div class="activity-item">
+                        <div class="activity-header">
+                            <div>
+                                <div class="activity-type">${activityIcon} ${activity.type}</div>
+                                <div class="activity-date">📍 ${activity.location} • ${new Date(activity.date).toLocaleDateString()}</div>
+                            </div>
+                            <button class="btn btn-danger" onclick="deleteActivity(${activity.id})">Delete</button>
+                        </div>
+                        ${activity.notes ? `<div class="activity-notes">${activity.notes}</div>` : ''}
+                        ${activity.weather ? `
+                            <div class="activity-weather">
+                                <strong>Weather Conditions:</strong> ${activity.weather.condition}, ${activity.weather.temp}°C, 
+                                Humidity: ${activity.weather.humidity}%, Wind: ${activity.weather.wind} km/h
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            listDiv.innerHTML = html;
+        }
+
+        function deleteActivity(id) {
+            if (confirm('Are you sure you want to delete this activity?')) {
+                activities = activities.filter(a => a.id !== id);
+                saveActivities();
+                displayActivities();
+            }
+        }
+
+        // Initialize
         window.onload = function() {
             getWeather();
+            loadActivities();
+            
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('activityDate').value = today;
+            document.getElementById('startDate').value = today;
         };
     </script>
 </body>
