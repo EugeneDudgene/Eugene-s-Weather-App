@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eugene's Weather - Farmer's Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .location-input {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .weather-display {
+            padding: 30px 20px;
+        }
+
+        .current-weather {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .temperature {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .weather-icon {
+            font-size: 5em;
+            margin: 10px 0;
+        }
+
+        .description {
+            font-size: 1.3em;
+            color: #555;
+            text-transform: capitalize;
+            margin: 10px 0;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .detail-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .detail-label {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .farmer-tools {
+            margin-top: 30px;
+        }
+
+        .tools-title {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .tool-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .tool-btn {
+            padding: 15px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .tool-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tool-btn span {
+            display: block;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .advice-panel {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .advice-panel.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .advice-title {
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .advice-content {
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #d32f2f;
+            background: #ffebee;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        @media (max-width: 500px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .temperature {
+                font-size: 3em;
+            }
+            
+            .tool-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌾 Eugene's Weather</h1>
+            <p>Smart Weather for Smart Farming</p>
+        </div>
+
+        <div class="location-input">
+            <div class="input-group">
+                <input type="text" id="locationInput" placeholder="Enter city name (e.g., Iowa City)" value="Des Moines">
+                <button class="btn btn-primary" onclick="getWeather()">Get Weather</button>
+            </div>
+        </div>
+
+        <div id="weatherContent"></div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const location = document.getElementById('locationInput').value;
+            const content = document.getElementById('weatherContent');
+            
+            if (!location) {
+                content.innerHTML = '<div class="error">Please enter a location</div>';
+                return;
+            }
+
+            content.innerHTML = '<div class="loading">🌤️ Fetching weather data...</div>';
+
+            try {
+                const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1&language=en&format=json`);
+                const geoData = await geoResponse.json();
+
+                if (!geoData.results || geoData.results.length === 0) {
+                    content.innerHTML = '<div class="error">Location not found. Please try another city.</div>';
+                    return;
+                }
+
+                const { latitude, longitude, name, country } = geoData.results[0];
+
+                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&timezone=auto`);
+                const weather = await weatherResponse.json();
+
+                displayWeather(weather, name, country);
+            } catch (error) {
+                content.innerHTML = '<div class="error">Error fetching weather data. Please try again.</div>';
+            }
+        }
+
+        function getWeatherIcon(code) {
+            const icons = {
+                0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+                45: '🌫️', 48: '🌫️',
+                51: '🌦️', 53: '🌦️', 55: '🌦️',
+                61: '🌧️', 63: '🌧️', 65: '🌧️',
+                71: '🌨️', 73: '🌨️', 75: '🌨️',
+                80: '🌦️', 81: '🌧️', 82: '⛈️',
+                95: '⛈️', 96: '⛈️', 99: '⛈️'
+            };
+            return icons[code] || '🌤️';
+        }
+
+        function getWeatherDescription(code) {
+            const descriptions = {
+                0: 'Clear sky', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast',
+                45: 'Foggy', 48: 'Foggy',
+                51: 'Light drizzle', 53: 'Moderate drizzle', 55: 'Dense drizzle',
+                61: 'Slight rain', 63: 'Moderate rain', 65: 'Heavy rain',
+                71: 'Slight snow', 73: 'Moderate snow', 75: 'Heavy snow',
+                80: 'Light showers', 81: 'Moderate showers', 82: 'Heavy showers',
+                95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Severe thunderstorm'
+            };
+            return descriptions[code] || 'Unknown';
+        }
+
+        function displayWeather(weather, city, country) {
+            const current = weather.current;
+            const daily = weather.daily;
+            
+            const html = `
+                <div class="weather-display">
+                    <div class="current-weather">
+                        <h2>${city}, ${country}</h2>
+                        <div class="weather-icon">${getWeatherIcon(current.weather_code)}</div>
+                        <div class="temperature">${Math.round(current.temperature_2m)}°C</div>
+                        <div class="description">${getWeatherDescription(current.weather_code)}</div>
+                    </div>
+
+                    <div class="weather-details">
+                        <div class="detail-card">
+                            <div class="detail-label">💧 Humidity</div>
+                            <div class="detail-value">${current.relative_humidity_2m}%</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">🌧️ Precipitation</div>
+                            <div class="detail-value">${current.precipitation} mm</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">💨 Wind Speed</div>
+                            <div class="detail-value">${Math.round(current.wind_speed_10m)} km/h</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">🌡️ Today's Range</div>
+                            <div class="detail-value">${Math.round(daily.temperature_2m_min[0])}° - ${Math.round(daily.temperature_2m_max[0])}°</div>
+                        </div>
+                    </div>
+
+                    <div class="farmer-tools">
+                        <div class="tools-title">🚜 Farmer's Tools</div>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" onclick="showIrrigationAdvice(${current.precipitation}, ${current.relative_humidity_2m}, ${daily.precipitation_sum[0]})">
+                                <span>💧</span>
+                                Irrigation
+                            </button>
+                            <button class="tool-btn" onclick="showPlantingAdvice(${current.temperature_2m}, ${current.weather_code})">
+                                <span>🌱</span>
+                                Planting
+                            </button>
+                            <button class="tool-btn" onclick="showHarvestAdvice(${current.weather_code}, ${current.wind_speed_10m}, ${daily.precipitation_probability_max[0]})">
+                                <span>🌾</span>
+                                Harvesting
+                            </button>
+                            <button class="tool-btn" onclick="showSprayAdvice(${current.wind_speed_10m}, ${current.precipitation})">
+                                <span>🚁</span>
+                                Spraying
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="advicePanel" class="advice-panel"></div>
+                </div>
+            `;
+            
+            document.getElementById('weatherContent').innerHTML = html;
+        }
+
+        function showAdvice(title, content) {
+            const panel = document.getElementById('advicePanel');
+            panel.innerHTML = `
+                <div class="advice-title">${title}</div>
+                <div class="advice-content">${content}</div>
+            `;
+            panel.className = 'advice-panel show';
+        }
+
+        function showIrrigationAdvice(precip, humidity, dailyPrecip) {
+            let advice = '';
+            if (precip > 5 || dailyPrecip > 10) {
+                advice = 'Recent rainfall is sufficient. Irrigation is not recommended today. Monitor soil moisture levels and check again tomorrow.';
+            } else if (humidity > 70) {
+                advice = 'High humidity detected. Light irrigation may be needed, but soil likely retains moisture well. Check soil before watering.';
+            } else if (humidity < 40) {
+                advice = 'Low humidity and dry conditions. Irrigation is highly recommended, especially for shallow-rooted crops. Water in early morning or evening.';
+            } else {
+                advice = 'Moderate conditions. Standard irrigation schedule recommended. Monitor crops for signs of water stress.';
+            }
+            showAdvice('💧 Irrigation Advice', advice);
+        }
+
+        function showPlantingAdvice(temp, code) {
+            let advice = '';
+            if (temp < 5) {
+                advice = 'Temperature too cold for most planting. Consider cold-hardy crops or wait for warmer weather. Protect existing seedlings from frost.';
+            } else if (temp < 15) {
+                advice = 'Good conditions for cool-season crops like lettuce, peas, and spinach. Ensure soil is workable before planting.';
+            } else if (temp > 30) {
+                advice = 'Very warm conditions. Best for heat-loving crops like tomatoes and peppers. Ensure adequate irrigation for new plantings.';
+            } else if (code >= 61 && code <= 65) {
+                advice = 'Rain expected. Delay planting to avoid waterlogged soil. Good time to prepare beds and plan your planting schedule.';
+            } else {
+                advice = 'Excellent planting conditions! Temperature is ideal for most crops. Soil should be at good moisture levels.';
+            }
+            showAdvice('🌱 Planting Advice', advice);
+        }
+
+        function showHarvestAdvice(code, wind, precipProb) {
+            let advice = '';
+            if (code >= 61 && code <= 99) {
+                advice = 'Poor harvest conditions due to precipitation. Rain can damage crops and make fields muddy. Delay harvesting if possible.';
+            } else if (wind > 40) {
+                advice = 'High winds detected. Not ideal for harvesting as it may damage crops and reduce grain quality. Consider postponing.';
+            } else if (precipProb > 60) {
+                advice = 'High chance of rain today. Plan to harvest early in the day or wait for clearer weather to avoid crop damage.';
+            } else if (wind < 20 && code <= 3) {
+                advice = 'Excellent harvest conditions! Dry weather and calm winds are ideal. Make the most of these conditions.';
+            } else {
+                advice = 'Good harvest conditions overall. Monitor weather updates and plan accordingly. Ensure equipment is ready.';
+            }
+            showAdvice('🌾 Harvesting Advice', advice);
+        }
+
+        function showSprayAdvice(wind, precip) {
+            let advice = '';
+            if (wind > 15) {
+                advice = 'Wind speed too high for spraying. Drift risk is significant and will reduce effectiveness. Wait for calmer conditions (below 15 km/h).';
+            } else if (precip > 0) {
+                advice = 'Active precipitation detected. Do not spray - rain will wash away chemicals. Wait at least 2 hours after rain stops.';
+            } else if (wind < 5) {
+                advice = 'Very calm conditions. Good for spraying but watch for temperature inversions. Best to spray in early morning or late evening.';
+            } else {
+                advice = 'Ideal spraying conditions! Wind is in optimal range (5-15 km/h). Ensure proper PPE and follow label instructions.';
+            }
+            showAdvice('🚁 Spraying Advice', advice);
+        }
+
+        // Load weather on page load
+        window.onload = function() {
+            getWeather();
+        };
+    </script>
+</body>
+</html>
